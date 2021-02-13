@@ -1,19 +1,23 @@
 //NEEDS WORK!
 
-require('./controllers/node_modules/dotenv').config();
+require('dotenv').config();
 const express=require("express");
 const app=express();
 const sequelize=require("./db")
 app.use(express.json());
 
 const user=require("./controllers/user-controller");
-const log=require("./controllers/log-controller");
+const trip=require("./controllers/trip-controller");
+const destination=require("./controllers/destination-controller");
+
 
 sequelize.sync();
 
 
-app.use(require("../middleware/headers"));
+app.use(require("./middleware/headers"));
 app.use("/user",user);
-app.use("/log",log);
+app.use("/trip",trip);
+app.use("/destination",destination);
+
 
 app.listen(3000,()=>console.log('App is listening on port 3000'));
