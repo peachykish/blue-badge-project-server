@@ -7,6 +7,7 @@ const validateSession = require("../middleware/validate-session");
 router.post("/", validateSession, (req, res) => {
   let tripEntry = {
     description: req.body.trip.description,
+    place:req.body.trip.place,
     lat: req.body.trip.lat,
     lon: req.body.trip.lon,
     owner_id: req.user.id,
@@ -42,6 +43,7 @@ router.get("/:id", validateSession, (req, res) => {
 router.put("/:id", validateSession, (req, res) => {
   let updatedEntry = {
     description: req.body.trip.description,
+    place:req.body.trip.place,
     lat: req.body.trip.lat,
     lon: req.body.trip.lon,
     //owner_id: req.user.id,
