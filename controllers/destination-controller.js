@@ -10,8 +10,7 @@ router.post("/", validateSession, (req, res) => {
     descr: req.body.destination.descr,
     xid: req.body.destination.xid,
     owner_id: req.user.id,
-    trip_id: req.trip.id,
-
+    trip_id: req.body.destination.trip_id,
   };
   Destination.create(destinationEntry)
     .then((entry) =>
@@ -30,7 +29,7 @@ router.get("/", validateSession, (req, res) => {
 
 //Delete a destination from a trip
 router.delete("/:id", validateSession, (req, res) => {
-    Destination.destroy({where: { id: req.params.id, owner_id: req.user.id,trip_id:req.trip_id} })
+    Destination.destroy({where: { id: req.params.id, owner_id: req.user.id,trip_id:req.trip.id} })
     .then((entry) => {
         if(entry===0){
             res.status(403).json({message:"You are not allowed to delete another user's destination!"})
@@ -40,7 +39,5 @@ router.delete("/:id", validateSession, (req, res) => {
     }) 
     .catch((err) => res.status(500).json({ error: err }));
 });
-
-
 
 module.exports = router;
