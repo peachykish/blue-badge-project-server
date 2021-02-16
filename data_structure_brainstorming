@@ -4,9 +4,8 @@ allData=
             user:{
                 id:1
                 username:john
-                password:johnsPassword
-            },
-            trips:[
+                password:johnsPassword,
+                trips:[
                 {
                     id:1
                     name:Spring Break

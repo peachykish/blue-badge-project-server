@@ -1,13 +1,12 @@
-var express = require("express");
-var router = express.Router();
+const router = require("express").Router();
+
 var Destination = require("../db").import("../models/destination");
 const validateSession = require("../middleware/validate-session");
 
 //Create a destination
 router.post("/", validateSession, (req, res) => {
+  console.log('tring to post destination');
   let destinationEntry = {
-    name: req.body.destination.name,
-    descr: req.body.destination.descr,
     xid: req.body.destination.xid,
     owner_id: req.user.id,
     trip_id: req.body.destination.trip_id,
@@ -16,12 +15,12 @@ router.post("/", validateSession, (req, res) => {
     .then((entry) =>
       res.status(200).json({ entry: entry, message: "Logged successfully" })
     )
-    .catch((err) => res.status(500).json({ error: err }));
+    .catch((err) => res.status(500).json({ error: err,message:"Create destination failed" }));
 });
 
 //Get all of a user's destinations for a certain trip
 router.get("/", validateSession, (req, res) => {
-  Destination.findAll({ where: { owner_id: req.user.id, trip_id:req.trip.id } })
+  Destination.findAll({ where: { owner_id: req.user.id } })
     .then((entries) => res.status(200).json({ entries }))
     .catch((err) => res.status(500).json({ error: err }));
 });
