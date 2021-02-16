@@ -1,0 +1,43 @@
+allData=
+    [
+        {
+            user:{
+                id:1
+                username:john
+                password:johnsPassword,
+                trips:[
+                {
+                    id:1
+                    name:Spring Break
+                    lat: 34.2
+                    lon: 102.214
+                    destinations:[
+                        {
+                            name: Space Needle
+                            description: Tall building
+                        },
+                        {
+                            name: Fish Market
+                            description: Kinda smelly
+                        },
+                    ]
+                },
+                {
+                    id:2
+                    name:Honeymoon
+                    lat: 34.2
+                    lon: 102.214
+                    destinations:[
+                        {
+                            name: Another place
+                            description: Tall building
+                        },
+                        {
+                            name: One more place
+                            description: Kinda smelly
+                        },
+                    ]
+                }
+            
+        }
+    }]
