@@ -1,11 +1,11 @@
-var express = require("express");
-var router = express.Router();
-var Trip = require("../db").import("../models/trip");
+const express = require("express");
+const router = express.Router();
+const Trip = require("../db").import("../models/trip");
 const validateSession = require("../middleware/validate-session");
 
 //Create a trip
 router.post("/", validateSession, (req, res) => {
-  let tripEntry = {
+  const tripEntry = {
     description: req.body.trip.description,
     place:req.body.trip.place,
     lat: req.body.trip.lat,
@@ -40,15 +40,15 @@ router.get("/:id", validateSession, (req, res) => {
 });
 
 //Edit a trip
-router.put("/:id", validateSession, (req, res) => {
-  let updatedEntry = {
+router.put("/update/:id", validateSession, (req, res) => {
+  const updatedTripEntry = {
     description: req.body.trip.description,
-    place:req.body.trip.place,
-    lat: req.body.trip.lat,
-    lon: req.body.trip.lon,
+    place: req.body.trip.place,
+    // lat: req.body.trip.lat,
+    // lon: req.body.trip.lon,
     //owner_id: req.user.id,
   };
-  Trip.update(updatedEntry, {
+  Trip.update(updatedTripEntry, {
     where: { id: req.params.id, owner_id: req.user.id },
   })
     .then((entry) => {

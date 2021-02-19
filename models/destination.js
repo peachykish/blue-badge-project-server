@@ -1,13 +1,5 @@
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define('destination', {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      descr: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
+  const Destination = sequelize.define('destination', {
       xid: {
         type: DataTypes.STRING,
         allowNull: false
@@ -22,4 +14,5 @@ module.exports = function(sequelize, DataTypes){
       }
   
     })
+    return Destination
   }
