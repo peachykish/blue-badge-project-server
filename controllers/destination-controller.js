@@ -7,7 +7,10 @@ const validateSession = require("../middleware/validate-session");
 router.post("/", validateSession, (req, res) => {
   console.log('tring to post destination');
   let destinationEntry = {
-    xid: req.body.destination.xid,
+    descr: req.body.destination.descr,
+    image: req.body.destination.image,
+    name: req.body.destination.name,
+    wikidata: req.body.destination.wikidata,
     owner_id: req.user.id,
     trip_id: req.body.destination.trip_id,
   };
