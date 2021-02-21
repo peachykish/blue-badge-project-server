@@ -1,14 +1,18 @@
 module.exports = function(sequelize, DataTypes){
     return sequelize.define('destination', {
+      descr: {
+        type: DataTypes.TEXT,
+        allowNull: false
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      descr: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      xid: {
+      wikidata: {
         type: DataTypes.STRING,
         allowNull: false
       },
