@@ -1,12 +1,11 @@
-const router = require("express").Router();
-
-var Destination = require("../db").import("../models/destination");
+const express = require('express');
+const router = express.Router();
 const validateSession = require("../middleware/validate-session");
+const Destination = require("../db").import("../models/destination");
 
 //Create a destination
-router.post("/", validateSession, (req, res) => {
-  console.log('tring to post destination');
-  let destinationEntry = {
+router.post("/create", validateSession, (req, res) => {
+  const destinationEntry = {
     descr: req.body.destination.descr,
     image: req.body.destination.image,
     name: req.body.destination.name,
@@ -15,10 +14,8 @@ router.post("/", validateSession, (req, res) => {
     trip_id: req.body.destination.trip_id,
   };
   Destination.create(destinationEntry)
-    .then((entry) =>
-      res.status(200).json({ entry: entry, message: "Logged successfully" })
-    )
-    .catch((err) => res.status(500).json({ error: err,message:"Create destination failed" }));
+    .then(destination => res.status(200).json(destination))
+    .catch(err => res.status(500).json({ error: err }))
 });
 
 //Get all of a user's destinations for a certain trip
