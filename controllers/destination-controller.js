@@ -23,7 +23,7 @@ router.post("/", validateSession, (req, res) => {
 
 //Get all of a user's destinations for a certain trip
 router.get("/", validateSession, (req, res) => {
-  Destination.findAll({ where: { owner_id: req.user.id } })
+  Destination.findAll({ where: { owner_id: req.user.id,trip_id: req.body.destination.trip_id,} })
     .then((entries) => res.status(200).json({ entries }))
     .catch((err) => res.status(500).json({ error: err }));
 });
