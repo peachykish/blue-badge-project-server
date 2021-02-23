@@ -7,7 +7,10 @@ const validateSession = require("../middleware/validate-session");
 router.post("/", validateSession, (req, res) => {
   console.log('tring to post destination');
   let destinationEntry = {
-    xid: req.body.destination.xid,
+    descr: req.body.destination.descr,
+    image: req.body.destination.image,
+    name: req.body.destination.name,
+    wikidata: req.body.destination.wikidata,
     owner_id: req.user.id,
     trip_id: req.body.destination.trip_id,
   };
@@ -20,7 +23,7 @@ router.post("/", validateSession, (req, res) => {
 
 //Get all of a user's destinations for a certain trip
 router.get("/", validateSession, (req, res) => {
-  Destination.findAll({ where: { owner_id: req.user.id } })
+  Destination.findAll({ where: { owner_id: req.user.id} })
     .then((entries) => res.status(200).json({ entries }))
     .catch((err) => res.status(500).json({ error: err }));
 });
@@ -28,7 +31,7 @@ router.get("/", validateSession, (req, res) => {
 
 //Delete a destination from a trip
 router.delete("/:id", validateSession, (req, res) => {
-    Destination.destroy({where: { id: req.params.id, owner_id: req.user.id,trip_id:req.trip.id} })
+    Destination.destroy({where: { id: req.params.id, owner_id: req.user.id} })
     .then((entry) => {
         if(entry===0){
             res.status(403).json({message:"You are not allowed to delete another user's destination!"})
